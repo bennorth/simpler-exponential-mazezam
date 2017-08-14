@@ -58,7 +58,7 @@ This version needs 981 moves to solve the 6-bit level; the previous version need
 
 ## Source code
 
-Available on github: _URL TO BE PUT HERE LATER_
+Available on github: [bennorth/simpler-exponential-mazezam](https://github.com/bennorth/simpler-exponential-mazezam).
 
 
 <div class="home-link"><p><a href="http://www.redfrontdoor.org/blog/">Ben North</a>, August 2017</p></div>
