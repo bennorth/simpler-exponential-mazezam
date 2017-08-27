@@ -19,7 +19,7 @@
 jQuery(document).ready(function($)
 {
     // IE lacks Math.sign(); provide simple version serving our needs:
-    if (!Math.sign)
+    if ( ! Math.sign)
         Math.sign = function(x) { return x == 0 ? 0 : (x > 0 ? 1 : -1); };
 
     var GRID_SZ = 24;
@@ -221,10 +221,7 @@ jQuery(document).ready(function($)
     }
 
     Scheduler.prototype.step = function() {
-        if (!this.enabled
-            || this.completed
-           )
-            //
+        if ( ! this.enabled || this.completed)
             return;
 
         if (this.current_chunk === null) {
