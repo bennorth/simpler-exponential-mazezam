@@ -236,6 +236,11 @@ jQuery(document).ready(function($)
         }
     }
 
+    Scheduler.prototype.launch = function() {
+        this.enabled = true;
+        this.step();
+    }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////
 
