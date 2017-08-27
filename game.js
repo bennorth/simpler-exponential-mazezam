@@ -256,6 +256,14 @@ jQuery(document).ready(function($)
         this.wait_phase = 0;
     }
 
+    UI.prototype.set_transition_length_1 = function(sel, t)
+    { $(sel).css({transition: 'top ' + t + 'ms linear, left ' + t + 'ms linear'}); }
+
+    UI.prototype.set_transition_length = function(t) {
+        this.set_transition_length_1('#player', t);
+        this.set_transition_length_1('.game-slice', t);
+    }
+
     UI.prototype.slow = function() { this.wait_period = 8; }
     UI.prototype.fast = function() { this.wait_period = 2; }
     UI.prototype.speed = function(val) { this[val](); }
