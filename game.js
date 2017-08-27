@@ -264,8 +264,8 @@ jQuery(document).ready(function($)
         this.set_transition_length_1('.game-slice', t);
     }
 
-    UI.prototype.slow = function() { this.wait_period = 8; }
-    UI.prototype.fast = function() { this.wait_period = 2; }
+    UI.prototype.slow = function() { this.set_transition_length(200); }
+    UI.prototype.fast = function() { this.set_transition_length(50); }
     UI.prototype.speed = function(val) { this[val](); }
 
 
