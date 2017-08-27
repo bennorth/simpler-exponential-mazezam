@@ -232,7 +232,7 @@ jQuery(document).ready(function($)
         }
 
         if (this.current_chunk !== null) {
-            this.current_chunk[this.current_step_in_chunk++]();
+            this.current_chunk[this.current_step_in_chunk++](this);
             if (this.current_step_in_chunk == this.current_chunk.length)
                 this.current_chunk = null;
         }
