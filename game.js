@@ -221,11 +221,6 @@ jQuery(document).ready(function($)
     }
 
     Scheduler.prototype.step = function() {
-        s = this;
-        var step_fun = function() { s.step(); };
-
-        window.requestAnimationFrame(step_fun);
-
         if (!this.enabled
             || this.completed
             || (++this.ui.wait_phase < this.ui.wait_period))
