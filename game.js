@@ -256,6 +256,7 @@ jQuery(document).ready(function($)
     { $(sel).css({transition: 'top ' + t + 'ms linear, left ' + t + 'ms linear'}); }
 
     UI.prototype.set_transition_length = function(t) {
+        this.transition_length = t;
         this.set_transition_length_1('#player', t);
         this.set_transition_length_1('.game-slice', t);
     }
