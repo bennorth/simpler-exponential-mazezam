@@ -238,6 +238,9 @@ jQuery(document).ready(function($)
         }
     }
 
+    Scheduler.prototype.pause = function(n_steps)
+    { setTimeout(this.step.bind(this), n_steps * this.ui.transition_length); }
+
     Scheduler.prototype.launch = function() {
         this.enabled = true;
         this.step();
