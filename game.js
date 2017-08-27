@@ -223,11 +223,9 @@ jQuery(document).ready(function($)
     Scheduler.prototype.step = function() {
         if (!this.enabled
             || this.completed
-            || (++this.ui.wait_phase < this.ui.wait_period))
+           )
             //
             return;
-
-        this.ui.wait_phase = 0;
 
         if (this.current_chunk === null) {
             this.current_chunk = this.next_chunk();
