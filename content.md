@@ -52,6 +52,8 @@ This gives a bit more freedom in the row design, which Aaron's simplification ex
 
 The 'Counter value' display here is bold and black when the puzzle represents a valid state.  It is shown non-bold and lighter when the puzzle is temporarily not representing the true Gray counter value.
 
+(Thanks to [Oliver Nash](http://olivernash.org/) for the suggestion to use CSS3 transitions in the animation.)
+
 ## Solution lengths
 
 This version needs 981 moves to solve the 6-bit level; the previous version needed 6730.
