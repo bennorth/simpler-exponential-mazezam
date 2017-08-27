@@ -252,8 +252,7 @@ jQuery(document).ready(function($)
     function UI() { this.reset(); }
 
     UI.prototype.reset = function() {
-        this.wait_period = 8;
-        this.wait_phase = 0;
+        this.slow();
     }
 
     UI.prototype.set_transition_length_1 = function(sel, t)
