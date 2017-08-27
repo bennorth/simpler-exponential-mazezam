@@ -274,5 +274,5 @@ jQuery(document).ready(function($)
     $('#btn-reset').click(function() { scheduler.reset(); $('#btn-start').attr('disabled', false); });
     $('#btn-start').click(function() { $(this).attr('disabled', true); scheduler.launch(); });
 
-    window.requestAnimationFrame(function() { scheduler.step(); });
+    $('#player').on('transitionend', function() { scheduler.step(); });
 });
