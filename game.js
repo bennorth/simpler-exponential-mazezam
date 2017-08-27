@@ -143,6 +143,8 @@ jQuery(document).ready(function($)
             p.counter.sync_display(gray_is_valid);
         };
 
+        return [move_and_adjust];
+
         var nops = repeated(2, function(){});
         return nops.concat([move_and_adjust]).concat(nops);
     }
