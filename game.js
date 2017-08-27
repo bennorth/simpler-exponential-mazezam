@@ -19,7 +19,7 @@
 jQuery(document).ready(function($)
 {
     // IE lacks Math.sign(); provide simple version serving our needs:
-    if (!Math.sign)
+    if ( ! Math.sign)
         Math.sign = function(x) { return x == 0 ? 0 : (x > 0 ? 1 : -1); };
 
     var GRID_SZ = 24;
@@ -143,8 +143,8 @@ jQuery(document).ready(function($)
             p.counter.sync_display(gray_is_valid);
         };
 
-        var nops = repeated(2, function(){});
-        return nops.concat([move_and_adjust]).concat(nops);
+        var nop = function(sched) { sched.pause(2); };
+        return [nop, move_and_adjust, nop];
     }
 
 
@@ -221,18 +221,8 @@ jQuery(document).ready(function($)
     }
 
     Scheduler.prototype.step = function() {
-        s = this;
-        var step_fun = function() { s.step(); };
-
-        window.requestAnimationFrame(step_fun);
-
-        if (!this.enabled
-            || this.completed
-            || (++this.ui.wait_phase < this.ui.wait_period))
-            //
+        if ( ! this.enabled || this.completed)
             return;
-
-        this.ui.wait_phase = 0;
 
         if (this.current_chunk === null) {
             this.current_chunk = this.next_chunk();
@@ -240,10 +230,18 @@ jQuery(document).ready(function($)
         }
 
         if (this.current_chunk !== null) {
-            this.current_chunk[this.current_step_in_chunk++]();
+            this.current_chunk[this.current_step_in_chunk++](this);
             if (this.current_step_in_chunk == this.current_chunk.length)
                 this.current_chunk = null;
         }
+    }
+
+    Scheduler.prototype.pause = function(n_steps)
+    { setTimeout(this.step.bind(this), n_steps * this.ui.transition_length); }
+
+    Scheduler.prototype.launch = function() {
+        this.enabled = true;
+        this.step();
     }
 
 
@@ -252,12 +250,20 @@ jQuery(document).ready(function($)
     function UI() { this.reset(); }
 
     UI.prototype.reset = function() {
-        this.wait_period = 8;
-        this.wait_phase = 0;
+        this.slow();
     }
 
-    UI.prototype.slow = function() { this.wait_period = 8; }
-    UI.prototype.fast = function() { this.wait_period = 2; }
+    UI.prototype.set_transition_length_1 = function(sel, t)
+    { $(sel).css({transition: 'top ' + t + 'ms linear, left ' + t + 'ms linear'}); }
+
+    UI.prototype.set_transition_length = function(t) {
+        this.transition_length = t;
+        this.set_transition_length_1('#player', t);
+        this.set_transition_length_1('.game-slice', t);
+    }
+
+    UI.prototype.slow = function() { this.set_transition_length(200); }
+    UI.prototype.fast = function() { this.set_transition_length(50); }
     UI.prototype.speed = function(val) { this[val](); }
 
 
@@ -270,7 +276,7 @@ jQuery(document).ready(function($)
 
     $('input[name=speed]').click(function() { ui.speed($(this).val()); });
     $('#btn-reset').click(function() { scheduler.reset(); $('#btn-start').attr('disabled', false); });
-    $('#btn-start').click(function() { $(this).attr('disabled', true); scheduler.enabled = true; });
+    $('#btn-start').click(function() { $(this).attr('disabled', true); scheduler.launch(); });
 
-    window.requestAnimationFrame(function() { scheduler.step(); });
+    $('#player').on('transitionend', function() { scheduler.step(); });
 });
