@@ -143,8 +143,8 @@ jQuery(document).ready(function($)
             p.counter.sync_display(gray_is_valid);
         };
 
-        var nops = repeated(2, function(sched) { sched.pause(1); });
-        return nops.concat([move_and_adjust]).concat(nops);
+        var nop = function(sched) { sched.pause(2); };
+        return [nop, move_and_adjust, nop];
     }
 
 
