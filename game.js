@@ -272,7 +272,7 @@ jQuery(document).ready(function($)
 
     $('input[name=speed]').click(function() { ui.speed($(this).val()); });
     $('#btn-reset').click(function() { scheduler.reset(); $('#btn-start').attr('disabled', false); });
-    $('#btn-start').click(function() { $(this).attr('disabled', true); scheduler.enabled = true; });
+    $('#btn-start').click(function() { $(this).attr('disabled', true); scheduler.launch(); });
 
     window.requestAnimationFrame(function() { scheduler.step(); });
 });
