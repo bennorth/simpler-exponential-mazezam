@@ -145,7 +145,7 @@ jQuery(document).ready(function($)
 
         return [move_and_adjust];
 
-        var nops = repeated(2, function(){});
+        var nops = repeated(2, function(sched) { sched.pause(1); });
         return nops.concat([move_and_adjust]).concat(nops);
     }
 
